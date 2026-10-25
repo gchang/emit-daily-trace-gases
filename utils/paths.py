@@ -1,10 +1,9 @@
 import os.path
-import git
 from utils.rio_utils import file_exists
 
 def codebase_folder():
-    repo = git.Repo('.', search_parent_directories=True)
-    return repo.working_tree_dir
+    # the folder that holds utils/ (this file's parent's parent), so it works without a .git folder too
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def models_storage():
     codebase = codebase_folder()
