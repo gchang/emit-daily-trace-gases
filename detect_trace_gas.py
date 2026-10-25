@@ -8,12 +8,16 @@ from pipeline.run_for_ch4 import run_for_ch4
 from pipeline.run_for_trace_gas import run_for_trace_gas
 from utils.rio_utils import mkdir
 
+def str2bool(value):
+    # argparse hands over text, and bool('False') is True, so read the word itself
+    return str(value).strip().lower() in ('true', '1', 'yes', 'y')
+
 parser = argparse.ArgumentParser(description='Codebase: Fully Automatic Trace Gas Plume Detection.')
 parser.add_argument('-gas', help='Which trace gas? (options: ch4, nh3, no2 and co)', default='ch4')
 parser.add_argument('-tile', help='Which EMIT tile to run? (e.g. EMIT_L1B_RAD_001_20260102T143123_2600209_005)', default='EMIT_L1B_RAD_001_20260102T143123_2600209_005')
 parser.add_argument('-raws_folder', help='Folder to store intermediate files', default='./run_data/intermediates_folder')
 parser.add_argument('-results_folder', help='Folder to save results to', default='./run_data/results')
-parser.add_argument('-enable_diffmf', help='When enabled will also add DiffMF bands to the CMF product (ps: it is not used by models)', default='False')
+parser.add_argument('-enable_diffmf', help='When enabled will also add DiffMF bands to the CMF product (ps: it is not used by models)', type=str2bool, default=False)
 
 def detect_trace_gas(gas, tile_ID, results_folder, raws_folder, use_diffmf=False):
     print("Running detection of", gas, "in EMIT tile:", tile_ID)
