@@ -1,0 +1,22 @@
+# Conda environment for the README's "Option 1 using conda", in one step:
+#   conda env create -f environment.yml
+#   conda activate trace_gases_env
+name: trace_gases_env
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11
+  - pip
+  # GDAL from conda-forge, as in the README
+  - gdal
+  # CPU build of PyTorch: a plain "pip install torch" on Linux pulls several GB
+  # of CUDA wheels, and the models run fine on CPU (drop "=*=cpu*" for a GPU build)
+  - pytorch=*=cpu*
+  - torchvision
+  - h5py
+  - pip:
+      # everything else, as listed in requirements.txt (pip keeps the torch above)
+      - -r requirements.txt
+      # the "hf" command for downloading the model weights
+      - huggingface_hub

@@ -52,6 +52,8 @@ conda install -c conda-forge gdal
 pip install -r requirements.txt
 # (^ you might need specific gdal and rasterio version depending on your machine's setup)
 # (^ e.g. gdal==3.7.0 rasterio==1.3.8)
+# (or all of Option 1 in one step, with a CPU build of PyTorch and the hf downloader:)
+conda env create -f environment.yml
 
 # Option 2 using uv
 uv sync
