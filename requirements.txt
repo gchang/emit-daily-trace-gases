@@ -6,6 +6,7 @@ geopandas
 matplotlib
 geojson
 netCDF4
+h5py
 earthaccess
 torch
 torchvision
